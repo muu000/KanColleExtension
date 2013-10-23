@@ -16,6 +16,10 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="devtools.html" />
+    <Content Include="panel.html" />
+    <TypeScriptCompile Include="panel.ts" />
+    <TypeScriptCompile Include="devtools.ts" />
     <TypeScriptCompile Include="iframe.ts" />
     <TypeScriptCompile Include="content.ts" />
     <None Include="manifest.json" />

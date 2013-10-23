@@ -13,5 +13,10 @@
 			"js": ["iframe.js"],
 			"run_at": "document_end"
 		}
+	],
+	"devtools_page": "devtools.html",
+	"web_accessible_resources": [
+		"content.js.map",
+		"iframe.js.map"
 	]
 }
