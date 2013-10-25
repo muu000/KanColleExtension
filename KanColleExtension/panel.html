@@ -9,8 +9,11 @@
             font-size: medium;
         }
 
-        td + td {
-            width: 200px;
+        td {
+            width: 150px;
+        }
+        #quest tr[state="1"] {
+            display: none;
         }
     </style>
 </head>
@@ -60,23 +63,27 @@
             <tr>
                 <td>1</td>
                 <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>2</td>
+                <td></td>
                 <td></td>
             </tr>
             <tr>
                 <td>3</td>
                 <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>4</td>
+                <td></td>
                 <td></td>
             </tr>
         </tbody>
     </table>
 
-    <h2>開発</h2>
+    <h2>建造</h2>
     <table id="kdock">
         <tbody>
             <tr>
@@ -106,6 +113,157 @@
         </tbody>
     </table>
 
+<!--    <h2>開発</h2>
+    <table>
+        <tbody>
+            <tr>
+                <th>api_member_id</th>
+                <th>api_complete_time</th>
+                <th>api_created_ship_id</th>
+                <th>api_item</th>
+            </tr>
+            <tr id="">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>-->
+
+    <h2>任務</h2>
+    <div>遂行中 <span id="exec_count"></span>/5</div>
+    <table id="quest">
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul id="log"></ul>
     <p id="debug"></p>
 </body>
 </html>
