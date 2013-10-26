@@ -15,6 +15,12 @@
         #quest tr[state="1"] {
             display: none;
         }
+        #quest tr td {
+            width: 250px;
+        }
+        #quest td + td {
+            width: 50px;
+        }
     </style>
 </head>
 <body>
@@ -25,7 +31,7 @@
         <tbody>
             <tr>
                 <td>艦隊数</td>
-                <td id="ship"></td>
+                <td id="ship_num"></td>
             </tr>
             <tr>
                 <td>装備アイテム数</td>
@@ -45,13 +51,16 @@
             <tr>
                 <td>第2艦隊</td>
                 <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>第3艦隊</td>
                 <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>第4艦隊</td>
+                <td></td>
                 <td></td>
             </tr>
         </tbody>
@@ -263,7 +272,21 @@
         </tbody>
     </table>
 
+
+    <h2>艦隊</h2>
+    <table id="deck_ship" border="1">
+        <tbody></tbody>
+    </table>
+
+    <h2>艦娘</h2>
+    <table id="ship">
+        <tbody></tbody>
+    </table>
+
     <ul id="log"></ul>
     <p id="debug"></p>
+    <footer>
+        (C) <a href="https://twitter.com/snow_cait" target="_blank">@snow_cait</a> 2013
+    </footer>
 </body>
 </html>

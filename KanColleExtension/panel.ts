@@ -17,7 +17,7 @@ chrome.devtools.network.onRequestFinished.addListener((request) => {
     request.getContent((content, encoding) => {
         var data = parseKscapi(content);
 
-        document.getElementById("ship").innerText = data.api_data.api_ship[0] + "/" + data.api_data.api_ship[1];
+        document.getElementById("ship_num").innerText = data.api_data.api_ship[0] + "/" + data.api_data.api_ship[1];
         document.getElementById("slotitem").innerText = data.api_data.api_slotitem[0] + "/" + data.api_data.api_slotitem[1];
         document.getElementById("material").innerText = data.api_data.api_material_max;
     });
@@ -33,9 +33,8 @@ chrome.devtools.network.onRequestFinished.addListener((request) => {
 
         var table = document.getElementById("ndock");
         data.api_data.forEach((d) => {
-
             var tr = table.getElementsByTagName("tr").item(d.api_id - 1);
-            tr.getElementsByTagName("td")[1].innerText = (d.api_ship_id > 0) ? ship_member[d.api_ship_id].api_name : d.api_ship_id;
+            tr.getElementsByTagName("td")[1].innerText = (d.api_ship_id > 0 && typeof (ship_member[d.api_ship_id]) != "undefined") ? ship_member[d.api_ship_id].api_name : d.api_ship_id;
             tr.getElementsByTagName("td")[2].className = "complete_time";
             tr.getElementsByTagName("td")[2].setAttribute("complete_time", d.api_complete_time);
             tr.getElementsByTagName("td")[2].innerText = getFormattedRemainingTime(d.api_complete_time);
@@ -54,9 +53,10 @@ chrome.devtools.network.onRequestFinished.addListener((request) => {
                 return;
             }
             var tr = table.getElementsByTagName("tr").item(d.api_id - 2);
-            tr.getElementsByTagName("td")[1].className = "complete_time";
-            tr.getElementsByTagName("td")[1].setAttribute("complete_time", d.api_mission[2]);
-            tr.getElementsByTagName("td")[1].innerText = getFormattedRemainingTime(d.api_mission[2]);
+            tr.getElementsByTagName("td")[1].innerText = d.api_mission[1];// mission_id
+            tr.getElementsByTagName("td")[2].className = "complete_time";
+            tr.getElementsByTagName("td")[2].setAttribute("complete_time", d.api_mission[2]);
+            tr.getElementsByTagName("td")[2].innerText = getFormattedRemainingTime(d.api_mission[2]);
         });
     });
 }, { urls: ["*://*/kcsapi/api_get_member/deck_port"] });
@@ -106,6 +106,112 @@ chrome.devtools.network.onRequestFinished.addListener((request) => {
         });
     });
 }, { urls: ["*://*/kcsapi/api_get_member/questlist"] });
+
+// deck member
+chrome.devtools.network.onRequestFinished.addListener((request) => {
+    request.getContent((content, encoding) => {
+        var data = parseKscapi(content);
+        if (typeof (data.api_data_deck) == "undefined") {
+            return;
+        }
+
+        var li = document.createElement("li");
+        li.innerText = "get deck member";
+        document.getElementById("log").appendChild(li);
+
+        var ships = {};
+        var table = document.getElementById("ship");
+        var tbody = document.createElement("tbody");
+        data.api_data.forEach((d, i) => {
+            ships[d.api_id] = d;
+
+            var tr = document.createElement("tr");
+            var td = document.createElement("td");
+            td.innerText = i + 1;
+            tr.appendChild(td);
+            var td = document.createElement("td");
+            td.innerText = d.api_ship_id;
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+        });
+        table.replaceChild(tbody, table.firstChild);
+
+        table = document.getElementById("deck_ship");
+        tbody = document.createElement("tbody");
+        data.api_data_deck.forEach((d, i) => {
+            var tr0 = document.createElement("tr");
+            var tdDeckName = document.createElement("td");
+            tdDeckName.innerText = d.api_name;
+            tdDeckName.setAttribute("rowspan", "6");
+            tr0.appendChild(tdDeckName);
+            var exist0 = d.api_ship[0] > 0;
+            var ship0 = exist0 ? ships[d.api_ship[0]] : null;
+            var tdName0 = document.createElement("td");
+            tdName0.innerText = (exist0 && typeof (ship_master[ship0.api_ship_id]) != "undefined") ? ship_master[ship0.api_ship_id].api_name : (exist0 ? ship0.api_ship_id : "-");
+            tr0.appendChild(tdName0);
+            var tdCond0 = document.createElement("td");
+            tdCond0.innerText = exist0 ? ship0.api_cond : "";
+            tr0.appendChild(tdCond0);
+            tbody.appendChild(tr0);
+
+            var tr1 = document.createElement("tr");
+            var exist1 = d.api_ship[1] > 0;
+            var ship1 = ships[d.api_ship[1]];
+            var tdName1 = document.createElement("td");
+            tdName1.innerText = (exist1 && typeof (ship_master[ship1.api_ship_id]) != "undefined") ? ship_master[ship1.api_ship_id].api_name : (exist1 ? ship1.api_ship_id : "-");
+            tr1.appendChild(tdName1);
+            var tdCond1 = document.createElement("td");
+            tdCond1.innerText = exist1 ? ship1.api_cond : "";
+            tr1.appendChild(tdCond1);
+            tbody.appendChild(tr1);
+
+            var tr2 = document.createElement("tr");
+            var exist2 = d.api_ship[2] > 0;
+            var ship2 = ships[d.api_ship[2]];
+            var tdName2 = document.createElement("td");
+            tdName2.innerText = (exist2 && typeof (ship_master[ship2.api_ship_id]) != "undefined") ? ship_master[ship2.api_ship_id].api_name : (exist2 ? ship2.api_ship_id : "-");
+            tr2.appendChild(tdName2);
+            var tdCond2 = document.createElement("td");
+            tdCond2.innerText = exist2 ? ship2.api_cond : "";
+            tr2.appendChild(tdCond2);
+            tbody.appendChild(tr2);
+
+            var tr3 = document.createElement("tr");
+            var exist3 = d.api_ship[3] > 0;
+            var ship3 = ships[d.api_ship[3]];
+            var tdName3 = document.createElement("td");
+            tdName3.innerText = (exist3 && typeof (ship_master[ship3.api_ship_id]) != "undefined") ? ship_master[ship3.api_ship_id].api_name : (exist3 ? ship3.api_ship_id : "-");
+            tr3.appendChild(tdName3);
+            var tdCond3 = document.createElement("td");
+            tdCond3.innerText = exist3 ? ship3.api_cond : "";
+            tr3.appendChild(tdCond3);
+            tbody.appendChild(tr3);
+
+            var tr4 = document.createElement("tr");
+            var exist4 = d.api_ship[4] > 0;
+            var ship4 = ships[d.api_ship[4]];
+            var tdName4 = document.createElement("td");
+            tdName4.innerText = (exist4 && typeof (ship_master[ship4.api_ship_id]) != "undefined") ? ship_master[ship4.api_ship_id].api_name : (exist4 ? ship4.api_ship_id : "-");
+            tr4.appendChild(tdName4);
+            var tdCond4 = document.createElement("td");
+            tdCond4.innerText = exist4 ? ship4.api_cond : "";
+            tr4.appendChild(tdCond4);
+            tbody.appendChild(tr4);
+
+            var tr5 = document.createElement("tr");
+            var exist5 = d.api_ship[5] > 0;
+            var ship5 = ships[d.api_ship[5]];
+            var tdName5 = document.createElement("td");
+            tdName5.innerText = (exist5 && typeof (ship_master[ship5.api_ship_id]) != "undefined") ? ship_master[ship5.api_ship_id].api_name : (exist5 ? ship5.api_ship_id : "-");
+            tr5.appendChild(tdName5);
+            var tdCond5 = document.createElement("td");
+            tdCond5.innerText = exist5 ? ship5.api_cond : "";
+            tr5.appendChild(tdCond5);
+            tbody.appendChild(tr5);
+        });
+        table.replaceChild(tbody, table.firstChild);
+    });
+}, { urls: ["*://*/kcsapi/api_get_member/ship2"] });
 
 // ship master
 var ship_master = {};
