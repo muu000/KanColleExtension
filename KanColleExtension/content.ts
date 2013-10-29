@@ -1,23 +1,18 @@
 window.addEventListener("load", (e) => {
-    // game
-    var main = document.getElementById("w");
-    main.style.cssFloat = "left";
-
-    // add extension space
-    var article = document.createElement("article");
-    article.style.cssFloat = "left";
-    main.parentNode.insertBefore(article, main.nextSibling);
-
-    // full flash
-    var fullFlashButton = document.createElement("a");
-    fullFlashButton.innerText = "full flash";
-    fullFlashButton.style.fontSize = "2em";
-    fullFlashButton.href = "javascript:void(0);";
-    fullFlashButton.addEventListener("click", (e) => {
+    var a = document.createElement("a");
+    a.href = "javascript:void(0);";
+    a.addEventListener("click", (ev) => {
         var iframe = document.getElementById("game_frame");
         var url = iframe.getAttribute("src");
         location.href = url;
         return false;
     });
-    article.appendChild(fullFlashButton);
+    var p = document.createElement("p");
+    p.innerText = "Full Flash";
+    a.appendChild(p);
+    var li = document.createElement("li");
+    li.className = "bt-sup";
+    li.appendChild(a);
+    var target = document.getElementById("btns");
+    target.appendChild(li);
 });
