@@ -16,6 +16,9 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="fuel.png" />
+    <Content Include="zekamashi.png" />
+    <TypeScriptCompile Include="background.ts" />
     <Content Include="devtools.html" />
     <Content Include="panel.html" />
     <TypeScriptCompile Include="panel.ts" />
